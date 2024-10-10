@@ -8,9 +8,10 @@ const Dropzone = ({ onDrop }) => {
   });
 
   return (
-    <div {...getRootProps()} style={{ border: '2px dashed #000', padding: '20px', textAlign: 'center' }}>
+    <div {...getRootProps()} className='dropzone'>
       <input {...getInputProps()} />
-      <p>Drag & drop images here, or click to select multiple files</p>
+      <p>③ここをクリックしてファイル選択
+        <br/>またはドラッグ&ドロップ</p>
     </div>
   );
 };

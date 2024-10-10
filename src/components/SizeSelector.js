@@ -7,7 +7,7 @@ const SizeSelector = ({ standardSizes, selectedSize, setSelectedSize, customWidt
 
   return (
     <div>
-      <label>サイズを選択してください:</label>
+      <label>②サイズを選択:</label>
       <select value={selectedSize} onChange={handleSizeChange}>
         {standardSizes.map((size) => (
           <option key={size.label} value={size.label}>

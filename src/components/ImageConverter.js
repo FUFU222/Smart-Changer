@@ -26,7 +26,7 @@ const ImageConverter = () => {
     setUploadedImages(prevImages => [...prevImages, ...newImages]);
   };
 
-  const convertImage = async (image) => {
+  const convertAllImages = async () => {
     let width, height;
     if (selectedSize === 'custom') {
       width = customWidth;
@@ -37,31 +37,31 @@ const ImageConverter = () => {
       height = selectedOption.height;
     }
 
-    if (width && height && image.file) {
-      const options = {
-        maxWidthOrHeight: Math.max(width, height),
-        useWebWorker: true,
-      };
-
+    if (width && height && uploadedImages.length > 0) {
       try {
-        const compressedImage = await imageCompression(image.file, options);
-        const convertedBlob = await imageCompression(compressedImage, { fileType: `image/${outputFormat}` });
-        const downloadUrl = URL.createObjectURL(convertedBlob);
-        
-        const link = document.createElement('a');
-        link.href = downloadUrl;
-        link.download = `converted-image.${outputFormat}`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        
-        alert(`Image converted to ${outputFormat} with size ${width}x${height} and compressed.`);
+        for (const image of uploadedImages) {
+          const options = {
+            maxWidthOrHeight: Math.max(width, height),
+            useWebWorker: true,
+          };
+          const compressedImage = await imageCompression(image.file, options);
+          const convertedBlob = await imageCompression(compressedImage, { fileType: `image/${outputFormat}` });
+          const downloadUrl = URL.createObjectURL(convertedBlob);
+          
+          const link = document.createElement('a');
+          link.href = downloadUrl;
+          link.download = `converted-image.${outputFormat}`;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }
+        alert('All images have been converted and downloaded.');
       } catch (error) {
-        alert('An error occurred while converting the image.');
+        alert('An error occurred while converting the images.');
         console.error(error);
       }
     } else {
-      alert('Please upload a valid image and specify the size.');
+      alert('Please upload valid images and specify the size.');
     }
   };
 
@@ -78,18 +78,14 @@ const ImageConverter = () => {
         setCustomHeight={setCustomHeight}
       />
       <Dropzone onDrop={onDrop} />
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginTop: '20px' }}>
+      <div className="container">
         {uploadedImages.map((image, index) => (
-          <div key={index} style={{ width: '150px', height: '150px', overflow: 'hidden', border: '1px solid #ddd' }}>
-            <img
-              src={image.url}
-              alt={`Uploaded ${index}`}
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
-            <button onClick={() => convertImage(image)} style={{ marginTop: '10px', width: '100%' }}>Convert</button>
+          <div key={index} className="image-item">
+            <img src={image.url} alt={`Uploaded ${index}`} />
           </div>
         ))}
       </div>
+      <button className="convert-button" onClick={convertAllImages}>Convert All Images</button>
     </div>
   );
 };
