@@ -33,4 +33,5 @@ const SizeSelector = ({ standardSizes, selectedSize, setSelectedSize, customWidt
   );
 };
 
+
 export default SizeSelector;
