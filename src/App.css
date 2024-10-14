@@ -73,6 +73,9 @@ h1 {
 
 .dropzone:hover {
   border-color: #4A90E2;
+  background-color: #d3dfed;
+  transition: all 0.3s;
+  cursor: pointer;
 }
 
 /* Button Styles */
@@ -100,6 +103,11 @@ select {
   margin: 10px;
   padding: 10px;
   font-size: 20px;
+}
+select:hover {
+  background-color: #e6eaef;
+  transition: all 0.2s;
+  cursor: pointer;
 }
 
 /* App Logo Animation */
