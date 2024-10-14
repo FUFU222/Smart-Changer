@@ -11,6 +11,7 @@ const ImageConverter = () => {
   const [customWidth, setCustomWidth] = useState('');
   const [customHeight, setCustomHeight] = useState('');
 
+  // 標準的なサイズを定義
   const standardSizes = [
     { label: '1920x1080 (Full HD)', width: 1920, height: 1080 },
     { label: '1200x1200', width: 1200, height: 1200 },
@@ -18,6 +19,7 @@ const ImageConverter = () => {
     { label: '1024x768 (XGA)', width: 1024, height: 768 },
   ];
 
+  // ドロップされたファイルを処理する関数
   const onDrop = (acceptedFiles) => {
     const newImages = acceptedFiles.map(file => ({
       file,
@@ -26,6 +28,7 @@ const ImageConverter = () => {
     setUploadedImages(prevImages => [...prevImages, ...newImages]);
   };
 
+  // 全ての画像を変換してダウンロードする関数
   const convertAllImages = async () => {
     let width, height;
     if (selectedSize === 'custom') {
@@ -55,13 +58,13 @@ const ImageConverter = () => {
           link.click();
           document.body.removeChild(link);
         }
-        alert('All images have been converted and downloaded.');
+        alert('全ての画像が変換され、ダウンロードされました。');
       } catch (error) {
-        alert('An error occurred while converting the images.');
+        alert('画像の変換中にエラーが発生しました。');
         console.error(error);
       }
     } else {
-      alert('Please upload valid images and specify the size.');
+      alert('有効な画像をアップロードし、サイズを指定してください。');
     }
   };
 
@@ -85,7 +88,7 @@ const ImageConverter = () => {
           </div>
         ))}
       </div>
-      <button className="convert-button" onClick={convertAllImages}>Convert All Images</button>
+      <button className="convert-button" onClick={convertAllImages}>全ての画像を変換</button>
     </div>
   );
 };
