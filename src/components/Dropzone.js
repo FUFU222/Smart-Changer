@@ -13,18 +13,13 @@ const isFileAllowed = (file) => {
 const Dropzone = ({ onDrop }) => {
   const { openModal } = useContext(ModalContext)
   
-  const handleFileError = () => {
-    openModal('ファイルエラー', '拡張子が正しくありません');
-  };
-
   const { getRootProps, getInputProps } = useDropzone({
     onDrop : (acceptedFiles) => {
       const validFiles = acceptedFiles.filter(file => isFileAllowed(file));
       if (validFiles.length > 0) {
         onDrop(validFiles);
       } else {
-        console.log("modalOpen")
-        handleFileError();
+        openModal('ファイルの形式がサポートされていません', 'JPEG、PNG、またはHEIC形式のファイルを選択してください。');
       }
     },
     maxFiles: 10,

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { ModalContext } from '../context/ModalContext';
 import Dropzone from './Dropzone';
 import FormatSelector from './FormatSelector';
 import SizeSelector from './SizeSelector';
@@ -58,7 +59,7 @@ const ImageConverter = () => {
           link.click();
           document.body.removeChild(link);
         }
-        alert('全ての画像が変換され、ダウンロードされました。');
+        alert(`全ての画像が ${outputFormat} 形式に変換されました。`);
       } catch (error) {
         alert('画像の変換中にエラーが発生しました。');
         console.error(error);
