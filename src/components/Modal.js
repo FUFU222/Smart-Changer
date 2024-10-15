@@ -15,7 +15,7 @@ const CustomModal = () => {
   >
       <h2>{modalTitle}</h2>
       <p>{modalContent}</p>
-      {isLoading && <BounceLoader className='loader' color='#4A90E2' loading={isLoading} size={60} speedMultiplier={0.8}/>}
+      {isLoading && <BounceLoader className='loader' loading={isLoading} size={60} speedMultiplier={0.8}/>}
       {!isLoading && <button onClick={closeModal}>閉じる</button>}
     </Modal>
   );
