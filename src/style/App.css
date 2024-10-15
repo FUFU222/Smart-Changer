@@ -74,7 +74,7 @@ h1 {
 .dropzone:hover {
   border-color: #4A90E2;
   background-color: #d3dfed;
-  transition: all 0.3s;
+  transition: all 0.2s;
   cursor: pointer;
 }
 
@@ -89,7 +89,7 @@ button {
   border-radius: 5px;
   cursor: pointer;
   font-size: 18px;
-  transition: background-color 0.3s;
+  transition: background-color 0.2s;
 }
 
 button:hover {
@@ -110,6 +110,11 @@ select:hover {
   cursor: pointer;
 }
 
+.loader {
+  margin: 0 auto;
+  color:#4A90E2;
+  padding: 16px 0;
+}
 /* App Logo Animation */
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

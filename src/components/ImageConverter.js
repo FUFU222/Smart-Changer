@@ -1,11 +1,15 @@
 import React, { useContext, useState } from 'react';
 import { ModalContext } from '../context/ModalContext';
+import JSZip from 'jszip';
+import saveAs from 'file-saver';
 import Dropzone from './Dropzone';
 import FormatSelector from './FormatSelector';
 import SizeSelector from './SizeSelector';
 import imageCompression from 'browser-image-compression';
 
+
 const ImageConverter = () => {
+  const {showLoading, openModal, closeModal} = useContext(ModalContext)
   const [uploadedImages, setUploadedImages] = useState([]);
   const [outputFormat, setOutputFormat] = useState('jpeg');
   const [selectedSize, setSelectedSize] = useState('1200x1200');
@@ -29,7 +33,7 @@ const ImageConverter = () => {
     setUploadedImages(prevImages => [...prevImages, ...newImages]);
   };
 
-  // 全ての画像を変換してダウンロードする関数
+  // 全ての画像を変換する関数
   const convertAllImages = async () => {
     let width, height;
     if (selectedSize === 'custom') {
@@ -43,6 +47,7 @@ const ImageConverter = () => {
 
     if (width && height && uploadedImages.length > 0) {
       try {
+        showLoading(true);
         for (const image of uploadedImages) {
           const options = {
             maxWidthOrHeight: Math.max(width, height),
@@ -51,21 +56,25 @@ const ImageConverter = () => {
           const compressedImage = await imageCompression(image.file, options);
           const convertedBlob = await imageCompression(compressedImage, { fileType: `image/${outputFormat}` });
           const downloadUrl = URL.createObjectURL(convertedBlob);
-          
-          const link = document.createElement('a');
-          link.href = downloadUrl;
-          link.download = `converted-image.${outputFormat}`;
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
+
+          //ダウンロードリンクをDOM上に作成しクリックしユーザーから見たら自動ダウンロードしているような挙動になる↓
+          // const link = document.createElement('a');
+          // link.href = downloadUrl;
+          // link.download = `converted-image.${outputFormat}`;
+          // document.body.appendChild(link);
+          // link.click();
+          // document.body.removeChild(link);
         }
-        alert(`全ての画像が ${outputFormat} 形式に変換されました。`);
+        showLoading(false); // 変換完了時にモーダルの内容を変える
+        openModal(`${ uploadedImages.length }枚の画像を ${outputFormat} 形式に変換しました。`,
+           'zipファイル or 個別でダウンロード');
       } catch (error) {
-        alert('画像の変換中にエラーが発生しました。');
+        showLoading(false); // 変換完了時にモーダルの内容を変える
+        openModal('エラー', '画像の変換中にエラーが発生しました。');
         console.error(error);
       }
     } else {
-      alert('有効な画像をアップロードし、サイズを指定してください。');
+      openModal('エラー', '有効な画像をアップロードし、サイズを指定してください。');
     }
   };
 
