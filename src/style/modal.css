@@ -1,0 +1,53 @@
+/* モーダルの背景 */
+.ReactModal__Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* モーダルのコンテンツ */
+.ReactModal__Content {
+  position: relative;
+  background: #fff;
+  padding: 20px;
+  width: 400px;
+  max-width: 90%;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* モーダルのタイトル */
+.ReactModal__Content h2 {
+  font-size: 1.2em;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* モーダル内のボタン */
+.ReactModal__Content button {
+  background-color: #4A90E2;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.ReactModal__Content button:hover {
+  background-color: #357ABD;
+}
+
+/* モーダル内のテキスト */
+.ReactModal__Content p {
+  font-size: 1em;
+  margin-bottom: 20px;
+  color: #666;
+}
