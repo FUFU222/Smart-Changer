@@ -12,7 +12,6 @@ export const ModalProvider = ({children}) => {
     setModalTitle(title)
     setModalContent(content)
     setIsModalOpen(true)
-
   }
   const closeModal = () => setIsModalOpen(false);
 
@@ -22,6 +21,12 @@ export const ModalProvider = ({children}) => {
       openModal('変換中', '画像を変換しています。少々お待ちください。')
     }
   }
+
+  const showConversionComplete = () => {
+    setIsLoading(false);
+    openModal('変換完了', 'ダウンロード方法を選択してください。');
+  };
+  
   return (
     <ModalContext.Provider value={{
       modalTitle, 
@@ -30,7 +35,8 @@ export const ModalProvider = ({children}) => {
       isLoading,
       openModal, 
       closeModal,
-      showLoading
+      showLoading,
+      showConversionComplete
       }}>
      {children}
     </ModalContext.Provider>

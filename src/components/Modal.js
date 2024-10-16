@@ -12,7 +12,7 @@ const CustomModal = () => {
     isOpen={isModalOpen} 
     className="custom-modal"
     overlayClassName="custom-modal-overlay"
-  >
+    >
       <h2>{modalTitle}</h2>
       <p>{modalContent}</p>
       {isLoading && <BounceLoader className='loader' loading={isLoading} size={60} speedMultiplier={0.8}/>}
