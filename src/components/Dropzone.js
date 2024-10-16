@@ -10,7 +10,7 @@ const isFileAllowed = (file) => {
   return allowedExtensions.includes(extension) && allowedMimeTypes.includes(file.type);
 };
 
-const Dropzone = ({ onDrop }) => {
+const Dropzone = ({ onDrop, uploadedImages }) => {
   const { openModal } = useContext(ModalContext)
   
   const { getRootProps, getInputProps } = useDropzone({
@@ -29,6 +29,13 @@ const Dropzone = ({ onDrop }) => {
     <div {...getRootProps()} className="dropzone">
       <input {...getInputProps()} />
       <p>ここにファイルをドロップしてください</p>
+      <div className="container">
+      {uploadedImages && uploadedImages.map((image, index) => (
+        <div key={index} className="image-item">
+          <img src={image.url} alt={`Uploaded ${index}`} />
+        </div>
+      ))}
+    </div>
     </div>
   );
 };

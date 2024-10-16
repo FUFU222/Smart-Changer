@@ -5,7 +5,7 @@ import { BounceLoader } from 'react-spinners';
 import '../style/modal.css'
 
 const CustomModal = () => {
-  const { isModalOpen, modalTitle, modalContent, closeModal, isLoading } = useContext(ModalContext);
+  const { isModalOpen, modalTitle, modalContent, closeModal, isProcessing } = useContext(ModalContext);
 
   return (
     <Modal 
@@ -15,8 +15,8 @@ const CustomModal = () => {
     >
       <h2>{modalTitle}</h2>
       <p>{modalContent}</p>
-      {isLoading && <BounceLoader className='loader' loading={isLoading} size={60} speedMultiplier={0.8}/>}
-      {!isLoading && <button onClick={closeModal}>閉じる</button>}
+      {isProcessing && <BounceLoader className='loader' loading={isProcessing} size={60} speedMultiplier={0.8}/>}
+      {!isProcessing && <button onClick={closeModal}>閉じる</button>}
     </Modal>
   );
 };
