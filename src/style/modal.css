@@ -35,6 +35,10 @@
   margin-bottom: 20px;
   color: #4a4a4a;
 }
+.ReactModal__Content input {
+  padding: 4px;
+  margin-bottom: 8px;
+}
 
 .ReactModal__Content button {
   background-color: #2563eb;
@@ -44,12 +48,11 @@
   font-size: 16px;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.2s;
+  transition: background-color 0.2s;
 }
 
 .ReactModal__Content button:hover {
   background-color: #1d4ed8;
-  transform: translateY(-2px);
 }
 .ReactModal__Content .close-button {
   background-color: #e5e7eb;
@@ -79,3 +82,5 @@
     opacity: 1;
   }
 }
+
+

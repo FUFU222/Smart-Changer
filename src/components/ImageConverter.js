@@ -1,9 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef} from 'react';
 import { ModalContext } from '../context/ModalContext';
 import Dropzone from './Dropzone';
 import FormatSelector from './FormatSelector';
 import SizeSelector from './SizeSelector';
 import imageCompression from 'browser-image-compression';
+import CustomModal from './CustomModal';
 
 const ImageConverter = () => {
   const { showModal } = useContext(ModalContext);
@@ -11,6 +12,7 @@ const ImageConverter = () => {
   const [convertedImages, setConvertedImages] = useState([]);
   const [outputFormat, setOutputFormat] = useState('jpeg');
   const [selectedSize, setSelectedSize] = useState('1200x1200');
+  const convertButtonRef = useRef(null); 
 
   const standardSizes = [
     { label: '1920x1080 (Full HD)', width: 1920, height: 1080 },
@@ -53,13 +55,17 @@ const ImageConverter = () => {
     if (newImages.length > 0) {
       setUploadedImages(prevImages => [...prevImages, ...newImages]);
     }
+
+    if(convertButtonRef.current) {
+      convertButtonRef.current.focus()
+    }
   };
 
   const convertAllImages = async () => {
     const selectedOption = standardSizes.find((size) => size.label === selectedSize);
     let width = selectedOption.width;
     let height = selectedOption.height;
-
+  
     if (width && height && uploadedImages.length > 0) {
       try {
         showModal("processing");
@@ -75,17 +81,21 @@ const ImageConverter = () => {
         setConvertedImages(converted);
         showModal("conversionComplete", converted);
       } catch (error) {
-        showModal("error");
-        console.error(error);
+        showModal("error", "画像変換中にエラーが発生しました。");
+        console.error("変換エラー:", error);
       }
     } else {
-      showModal("error");
+      showModal("error", "変換する画像が存在しないか、サイズが正しく選択されていません。");
     }
   };
+  
 
   const clearImages = () => {
-    setUploadedImages([])
-  }
+    uploadedImages.forEach((image) => {
+      URL.revokeObjectURL(image.url);
+    });
+    setUploadedImages([]);
+  };
 
   return (
     <div>
@@ -95,7 +105,9 @@ const ImageConverter = () => {
         selectedSize={selectedSize} setSelectedSize={setSelectedSize}
       />
       <Dropzone onDrop={onDrop} uploadedImages={uploadedImages} clearImages={clearImages}/>
-      <button className="convert-button" onClick={convertAllImages}>アップロードした画像を変換</button>
+      <button ref={convertButtonRef} className="convert-button" 
+      onClick={convertAllImages}>④アップロードした画像を変換</button>
+      <CustomModal images={convertedImages}/>
     </div>
   );
 };

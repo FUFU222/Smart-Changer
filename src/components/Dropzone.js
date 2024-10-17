@@ -28,8 +28,8 @@ const Dropzone = ({ onDrop, uploadedImages, clearImages }) => {
   return (
     <div className="dropzone-container">
       <div {...getRootProps()} className="dropzone-area">
-        <input {...getInputProps()} />
-        <p>ここにファイルをドロップ</p>
+        <input {...getInputProps()} autoComplete='off' />
+        <p>③ここにファイルをドロップ</p>
       </div>
 
       <div className="uploaded-images-container">
@@ -52,7 +52,7 @@ const Dropzone = ({ onDrop, uploadedImages, clearImages }) => {
           }}
           className="clear-button"
         >
-          アップロードファイルをクリア
+          アップロードをクリア
         </button>
       </div>
     </div>
