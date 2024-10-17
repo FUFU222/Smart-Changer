@@ -1,38 +1,57 @@
-import React,{ createContext, useState } from "react";
+import React, { createContext, useState } from "react";
 
-export const ModalContext = createContext()
+export const ModalContext = createContext();
 
-export const ModalProvider = ({children}) => {
-  const [modalTitle, setModalTitle] = useState('')
-  const [modalContent, setModalContent] = useState('')
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+export const ModalProvider = ({ children }) => {
+  const [modalTitle, setModalTitle] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [fileName, setFileName] = useState('');
 
-  const openModal = (title, content) => {
-    setModalTitle(title)
-    setModalContent(content)
-    setIsModalOpen(true)
+  const openModal = (title) => {
+    setModalTitle(title);
+    setIsModalOpen(true);
+  };
 
-  }
-  const closeModal = () => setIsModalOpen(false);
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setIsProcessing(false);
+  };
 
-  const showLoading = (isLoading) => {
-    setIsLoading(isLoading)
-    if (isLoading) {
-      openModal('変換中', '画像を変換しています。少々お待ちください。')
+  const showModal = (type) => {
+    switch (type) {
+      case "processing":
+        setIsProcessing(true);
+        openModal("処理中");
+        break;
+      case "conversionComplete":
+        setIsProcessing(false);
+        openModal("変換完了");
+        break;
+      case "downloadComplete":
+        setIsProcessing(false);
+        openModal("ダウンロード完了");
+        break;
+      default:
+        setIsProcessing(false);
+        openModal("エラー");
     }
-  }
+  };
+
   return (
-    <ModalContext.Provider value={{
-      modalTitle, 
-      modalContent, 
-      isModalOpen, 
-      isLoading,
-      openModal, 
-      closeModal,
-      showLoading
-      }}>
-     {children}
+    <ModalContext.Provider
+      value={{
+        modalTitle,
+        isModalOpen,
+        isProcessing,
+        fileName,
+        setFileName,
+        openModal,
+        closeModal,
+        showModal,
+      }}
+    >
+      {children}
     </ModalContext.Provider>
-  )
-}
+  );
+};

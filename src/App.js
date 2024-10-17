@@ -1,5 +1,5 @@
 import { ModalProvider } from './context/ModalContext';
-import CustomModal from './components/Modal'
+import CustomModal from './components/CustomModal'
 import Header from '../src/components/Header'
 import Main from '../src/components/Main'
 import Footer from '../src/components/Footer'
