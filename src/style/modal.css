@@ -1,53 +1,81 @@
-/* モーダルの背景 */
 .ReactModal__Overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: fadeIn 0.3s ease;
 }
 
-/* モーダルのコンテンツ */
 .ReactModal__Content {
   position: relative;
-  background: #fff;
-  padding: 20px;
+  background: #ffffff;
+  padding: 25px;
   width: 400px;
   max-width: 90%;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
   text-align: center;
+  transform: scale(0.9);
+  animation: slideUp 0.3s ease forwards;
 }
 
-/* モーダルのタイトル */
 .ReactModal__Content h2 {
-  font-size: 1.2em;
+  font-size: 1.4em;
   margin-bottom: 15px;
-  color: #333;
+  color: #1e3a8a;
 }
 
-/* モーダル内のボタン */
-.ReactModal__Content button {
-  background-color: #4A90E2;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.ReactModal__Content button:hover {
-  background-color: #357ABD;
-}
-
-/* モーダル内のテキスト */
 .ReactModal__Content p {
   font-size: 1em;
   margin-bottom: 20px;
-  color: #666;
+  color: #4a4a4a;
+}
+
+.ReactModal__Content button {
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.ReactModal__Content button:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-2px);
+}
+.ReactModal__Content .close-button {
+  background-color: #e5e7eb;
+  color: #1f2937;
+}
+
+.ReactModal__Content .close-button:hover {
+  background-color: #cbd5e1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px) scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
 }
