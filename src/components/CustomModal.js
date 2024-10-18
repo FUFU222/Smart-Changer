@@ -5,7 +5,7 @@ import { downloadAsZip } from '../utils/download';
 import { BounceLoader } from 'react-spinners';
 import '../style/modal.css';
 
-const CustomModal = ({ images }) => {
+const CustomModal = ({ images, clearImages }) => {
   const {
     isModalOpen,
     modalTitle,
@@ -13,13 +13,20 @@ const CustomModal = ({ images }) => {
     isProcessing,
     fileName,
     setFileName,
-    showModal,  // showModal関数を追加
+    showModal,
   } = useContext(ModalContext);
+
+  // ファイル名をサニタイズする関数
+  const sanitizeFileName = (name) => {
+    return name.replace(/[^a-zA-Z0-9-_]/g, '_');
+  };
 
   const handleDownload = async () => {
     try {
-      await downloadAsZip(images, fileName);
-      showModal("downloadComplete");  // ダウンロード完了後にモーダルを更新
+      const sanitizedFileName = sanitizeFileName(fileName.trim()) || 'converted_images';
+      await downloadAsZip(images, sanitizedFileName);
+      showModal("downloadComplete");
+      clearImages();
     } catch (error) {
       console.error("ダウンロードエラー:", error);
       showModal("error", "ダウンロード中にエラーが発生しました。");
@@ -29,6 +36,7 @@ const CustomModal = ({ images }) => {
   return (
     <Modal
       isOpen={isModalOpen}
+      onRequestClose={closeModal}
       className="custom-modal"
       overlayClassName="custom-modal-overlay"
     >
@@ -51,7 +59,8 @@ const CustomModal = ({ images }) => {
                   onChange={(e) => setFileName(e.target.value)}
                   placeholder="ファイル名を入力"
                   className="file-name-input"
-                />.zip
+                />
+                <span>.zip</span>
                 <button onClick={handleDownload}>
                   zipでダウンロード
                 </button>

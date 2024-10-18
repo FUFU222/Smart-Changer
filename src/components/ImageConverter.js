@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef} from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import { ModalContext } from '../context/ModalContext';
 import Dropzone from './Dropzone';
 import FormatSelector from './FormatSelector';
@@ -88,14 +88,21 @@ const ImageConverter = () => {
       showModal("error", "変換する画像が存在しないか、サイズが正しく選択されていません。");
     }
   };
-  
-
+  // 画像配列がキャッシュされないよう削除する関数
   const clearImages = () => {
     uploadedImages.forEach((image) => {
       URL.revokeObjectURL(image.url);
     });
     setUploadedImages([]);
+    setConvertedImages([]);
   };
+  // useEffectを使用してstate更新に応じた画像配列削除処理を確認
+  // useEffect(() => {
+  //   console.log('クリア後のuploadedImages:', uploadedImages);
+  // }, [uploadedImages]);
+  
+  
+  
 
   return (
     <div>
@@ -107,7 +114,7 @@ const ImageConverter = () => {
       <Dropzone onDrop={onDrop} uploadedImages={uploadedImages} clearImages={clearImages}/>
       <button ref={convertButtonRef} className="convert-button" 
       onClick={convertAllImages}>④アップロードした画像を変換</button>
-      <CustomModal images={convertedImages}/>
+      <CustomModal images={convertedImages} clearImages={clearImages}/>
     </div>
   );
 };
