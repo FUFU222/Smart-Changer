@@ -96,7 +96,7 @@ const ImageConverter = () => {
     setUploadedImages([]);
     setConvertedImages([]);
   };
-  // useEffectを使用してstate更新に応じた画像配列削除処理を確認
+  // useEffectを使用したstate更新に応じた画像配列削除処理を確認するテストコード
   // useEffect(() => {
   //   console.log('クリア後のuploadedImages:', uploadedImages);
   // }, [uploadedImages]);

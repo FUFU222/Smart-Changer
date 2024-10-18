@@ -18,7 +18,7 @@ const CustomModal = ({ images, clearImages }) => {
 
   // ファイル名をサニタイズする関数
   const sanitizeFileName = (name) => {
-    return name.replace(/[^a-zA-Z0-9-_]/g, '_');
+    return name.replace(/[^a-zA-Z0-9\u3040-\u30FF\u4E00-\u9FFF-_]/g, '_');
   };
 
   const handleDownload = async () => {
@@ -56,9 +56,14 @@ const CustomModal = ({ images, clearImages }) => {
                 <input
                   type="text"
                   value={fileName}
-                  onChange={(e) => setFileName(e.target.value)}
+                  onChange={(e) => {
+                    if (e.target.value.length <= 50) {
+                      setFileName(e.target.value);
+                    }
+                  }}
                   placeholder="ファイル名を入力"
                   className="file-name-input"
+                  maxLength={50}
                 />
                 <span>.zip</span>
                 <button onClick={handleDownload}>
