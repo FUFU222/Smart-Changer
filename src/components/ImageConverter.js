@@ -11,15 +11,20 @@ const ImageConverter = () => {
   const [uploadedImages, setUploadedImages] = useState([]);
   const [convertedImages, setConvertedImages] = useState([]);
   const [outputFormat, setOutputFormat] = useState('jpeg');
-  const [selectedSize, setSelectedSize] = useState('1200x1200');
+  const [selectedSize, setSelectedSize] = useState('1200x1200 (ブログ記事など)');
   const convertButtonRef = useRef(null); 
 
   const standardSizes = [
-    { label: '1920x1080 (Full HD)', width: 1920, height: 1080 },
-    { label: '1200x1200', width: 1200, height: 1200 },
-    { label: '1280x720 (HD)', width: 1280, height: 720 },
-    { label: '1024x768 (XGA)', width: 1024, height: 768 },
+    { label: '2400x3600 (A4プリント)', width: 2400, height: 3600 },  // 印刷向けのA4サイズ
+    { label: '1920x1080 (フルHD)', width: 1920, height: 1080 },  // フルスクリーン表示向け
+    { label: '1080x1920 (スマホ向け縦画像)', width: 1080, height: 1920 },  // Instagram StoriesやTikTok向けの縦長サイズ
+    { label: '1280x720 (HD)', width: 1280, height: 720 },  // YouTubeなどHDコンテンツ向け
+    { label: '1200x1200 (ブログ記事など)', width: 1200, height: 1200 },  // 発注者が最も使用する形式
+    { label: '1080x1080 (Instagramフィード)', width: 1080, height: 1080 },  // InstagramやSNS向けの正方形
+    { label: '1024x768 (XGA（低解像度）)', width: 1024, height: 768 },  // 古い解像度のモニター向け
+    { label: '800x600 (Webサムネイル)', width: 800, height: 600 },  // 小さめのウェブ画像やサムネイル
   ];
+  
 
   // convertImageToBlob関数の定義 - 画像を圧縮してBlobに変換する
   const convertImageToBlob = async (image, options) => {
