@@ -1,70 +1,101 @@
-# Getting Started with Create React App
+# Smart Changer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+Smart Changer is a web application designed to provide users with a convenient way to convert images to various formats and sizes. Users can drag and drop images, select the desired output format and dimensions, and easily download the converted images.
 
-In the project directory, you can run:
+Smart Changer は、ユーザーが画像をさまざまな形式やサイズに変換するための便利な方法を提供するウェブアプリケーションです。ユーザーは画像をドラッグアンドドロップでアップロードし、希望の出力形式とサイズを選択し、簡単に変換された画像をダウンロードできます。
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Drag and drop file upload
+- Image format conversion (e.g., JPEG, PNG)
+- Customizable output size
+- User-friendly interface with clear instructions and minimal interactions
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+ドラッグアンドドロップによるファイルアップロード
 
-### `npm test`
+画像フォーマットの変換（例: JPEG, PNG）
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+出力サイズのカスタマイズ
 
-### `npm run build`
+ユーザーフレンドリーなインターフェースとわかりやすい指示
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Tech Stack
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Frontend**: React.js, CSS Modules
+- **Deployment**: Vercel
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+フロントエンド: React.js, CSS Modules
 
-### `npm run eject`
+デプロイ: Vercel
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Installation
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To run the project locally, follow these steps:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Clone the repository:
+   ```sh
+   git clone [repository URL]
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd smart-changer
+   ```
+3. Install dependencies:
+   ```sh
+   npm install
+   ```
+4. Start the development server:
+   ```sh
+   npm start
+   ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The application will be available at `http://localhost:3000`.
 
-## Learn More
+プロジェクトをローカルで実行するには、以下の手順に従ってください。
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+リポジトリをクローンします。
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+git clone [リポジトリ URL]
 
-### Code Splitting
+プロジェクトディレクトリに移動します。
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+cd smart-changer
 
-### Analyzing the Bundle Size
+依存関係をインストールします。
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+npm install
 
-### Making a Progressive Web App
+開発サーバーを起動します。
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+npm start
 
-### Advanced Configuration
+アプリケーションは http://localhost:3000 で利用可能です。
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Deployment
 
-### Deployment
+The application is deployed using [Vercel](https://vercel.com/). Any updates made to the main branch are automatically reflected in the production build at the deployment URL.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+このアプリケーションは Vercel を使用してデプロイされています。メインブランチに行われた更新は、自動的に本番ビルドに反映されます。
 
-### `npm run build` fails to minify
+## Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Select the desired output format using the dropdown menu.
+2. Select the desired size for the image.
+3. Drag and drop an image into the designated area.
+4. Click on "Convert Image" to complete the process.
+
+ドロップダウンメニューから希望の出力形式を選択します。
+
+希望する画像のサイズを選択します。
+
+指定されたエリアに画像をドラッグアンドドロップします。
+
+「画像を変換」をクリックしてプロセスを完了させます。
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for more details.
+
+このプロジェクトは MIT ライセンスの下でライセンスされています。詳細については LICENSE ファイルをご覧ください。
